@@ -1,0 +1,50 @@
+digraph cmd{
+node[fontname="Microsoft Yahei"]
+cn->{new ls del get edit load media config help}
+ls_default[shape="rectangle" label="列出博客列表，默认为10条"]
+ls->ls_default
+ls_number[label="100"]
+ls_number_desc[shape="rectangle" label="列出100条博客记录"]
+ls->ls_number->ls_number_desc
+
+del_post_simple[label="0"]
+del_post_complex[label="2343434"]
+del->{del_post_simple del_post_complex}
+del_post_simple_desc[label="删除最近的第0条博客" shape="rectangle"]
+del_post_complex_desc[label="删除id为2343434的博客" shape="rectangle"]
+del_post_simple->del_post_simple_desc
+del_post_complex->del_post_complex_desc
+
+get_simple[label="3"]
+get_complex[label="123343"]
+get->{get_simple get_complex}
+get_simple_desc[shape="rectangle" label="获取最近的第3条博客"]
+get_complex_desc[shape="rectangle" label="获取id为123343的博客"]
+get_simple->get_simple_desc
+get_complex->get_complex_desc
+
+edit_postid[label="0(表示postid)"]
+edit_file[label="haha.txt"]
+edit_simple_desc[shape="rectangle" label="编辑最近第0条博客，使其内容为haha.txt"]
+edit->edit_postid->edit_file->edit_simple_desc
+
+load_simple[shape="rectangle" label="增量更新本地博客列表[fast]"]
+load_full[ label="complete"]
+load_full_desc[shape="rectangle" label="彻底更新本地博客列表[slow]"]
+load->{load_simple load_full}
+load_full->load_full_desc
+
+new_post[label="haha.txt"]
+new_post_label[shape="rectangle" label="新建一篇题目为haha的博客"]
+new->new_post->new_post_label
+
+media_file[label="haha.jpg"]
+media_label[shape="rectangle" label="上传图片"]
+media->media_file->media_label
+
+config_desc[shape=rectangle label="全局设置用户（只需设置一次）"]
+config->userid->username->password->config_desc
+
+help_desc[shape=rectangle label="查看系统帮助"]
+help->help_desc
+}

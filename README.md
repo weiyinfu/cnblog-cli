@@ -1,0 +1,2 @@
+cnblog为java程序
+write-cnblog是vscode博客园插件，也实现了xmlrpc

@@ -1,0 +1,15 @@
+中括号‘[]’表示可选命令，‘$’表示可变参数
+
+cn ls [$number]      : Number means how many posts you want to see
+cn load [$complete]  : It will cost more time if load complete
+cn new $file         : Create a new post
+cn edit $post $file  : Update the post with the file's content
+cn del $post         : Delete a post by id
+cn get $post         : Download a post to local,the file's name is the post's title
+cn media $file       : Upload one media object and get the url
+cn config $userid $username $password :Config global username and password
+cn help :See help
+
+post有两种方式指明：
+* 0~10之间的数字表示最新的第几篇随笔的id
+* url中的随笔链接
