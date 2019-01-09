@@ -1,6 +1,7 @@
 package cnblog.xmlrpc;
 
 import cnblog.entity.*;
+import cnblog.util.Util;
 import com.alibaba.fastjson.JSON;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
@@ -8,7 +9,6 @@ import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class Blog {
@@ -151,13 +151,8 @@ public int newCategory(WpCategory category) {
 // 上传图片等二进制文件，返回url链接
 public String newMediaObject(byte[] bits, String filename) {
     try {
-        filename = Paths.get(filename).getFileName().toString();
-        int pointIndex = filename.lastIndexOf('.');
-        if (pointIndex == -1) {
-            throw new RuntimeException("can only upload jpg/png/gif");
-        }
-        String fileType = filename.substring(pointIndex + 1);
-        if (Arrays.asList("jpg", "png", "gif").indexOf(fileType) == -1) {
+        String fileType = Util.getFileType(filename);
+        if (fileType == null || Arrays.asList("jpg", "png", "gif").indexOf(fileType) == -1) {
             throw new RuntimeException("can only upload jpg/png/gif");
         }
         Map<String, Object> map = new HashMap<>();

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -172,6 +173,11 @@ static void parse(String[] args) {
                 break;
             }
             String filename = args[2];
+            String fileType = Util.getFileType(filename);
+            if (fileType == null || Arrays.asList("jpg", "png", "gif").indexOf(fileType) == -1) {
+                System.out.println("can only upload jpg/png/gif");
+                break;
+            }
             try {
                 byte[] data = Files.readAllBytes(Paths.get(filename));
                 String url = cnblog.newMediaObject(data, Paths.get(filename).getFileName().toString());

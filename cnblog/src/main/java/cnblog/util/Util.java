@@ -126,6 +126,14 @@ public static Document request(String url) {
     return null;
 }
 
+public static String getFileType(String filepath) {
+    String filename = Paths.get(filepath).getFileName().toString();
+    int pointIndex = filename.lastIndexOf('.');
+    if (pointIndex == -1) return null;
+    String fileType = filename.substring(pointIndex + 1);
+    return fileType;
+}
+
 public static void main(String[] args) {
     System.out.println(Util.loads(Paths.get("天下大势为我所控.txt")));
 }
