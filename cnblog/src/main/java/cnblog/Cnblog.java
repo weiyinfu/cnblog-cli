@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
@@ -143,13 +142,5 @@ public static void main(String[] args) {
     Cnblog cnblog = new Cnblog();
     cnblog.loadConfig();
     System.out.println(cnblog.userid + " " + cnblog.username + " " + cnblog.password);
-    try {
-        byte[] data = Files.readAllBytes(Paths.get("C:\\Users\\weidiao\\Pictures\\beauty\\2.jpeg"));
-        System.out.println(data.length);
-        String url = cnblog.newMediaObject(data, "beauty.jpg");
-        System.out.println(url);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
 }
 }
