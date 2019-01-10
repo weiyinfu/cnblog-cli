@@ -1,11 +1,13 @@
 package cnblog.spider;
 
-import com.alibaba.fastjson.JSON;
 import cnblog.entity.Post;
 import cnblog.util.Util;
+import com.alibaba.fastjson.JSON;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CnblogSpider {
+Logger logger = LoggerFactory.getLogger(CnblogSpider.class);
 String userid;
 //爬虫的基本链接
 final static String BASE_URL = "http://www.cnblogs.com/";
@@ -40,11 +43,13 @@ public String getLinkById(String postId) {
  */
 public void updateLocalCache(boolean completely) {
     if (completely) {
+        logger.info("updating completely");
         List<Post> posts = getPostsAfter(0);
         save(posts);
     } else {
+        logger.info("updating greedyly");
         List<Post> cachePosts = getCachePosts();
-        if (cachePosts == null) {//本地无缓存，直接进行全部更新
+        if (cachePosts == null || cachePosts.size() == 0) {//本地无缓存，直接进行全部更新
             save(getPostsAfter(0));
         } else {
             updateChanges(cachePosts);

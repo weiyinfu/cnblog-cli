@@ -3,6 +3,8 @@ package cnblog;
 import cnblog.entity.Post;
 import cnblog.util.CharTable;
 import cnblog.util.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 实现命令行
@@ -18,6 +21,8 @@ import java.util.List;
 public class Cmd {
 static final String HELP = Util.loads("/help.txt");
 static Cnblog cnblog = new Cnblog();
+static Logger logger = LoggerFactory.getLogger(Cmd.class);
+
 final static String[] options = "load help new ls edit get del media config".split(" ");
 
 static void error() {
@@ -263,6 +268,7 @@ private static Post loadPostFromFile(Path path) {
 
 
 public static void main(String[] args) {
+    logger.info("receive command " + Arrays.stream(args).collect(Collectors.joining(";")));
     parse(args);
 }
 

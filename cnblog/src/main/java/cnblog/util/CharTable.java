@@ -105,8 +105,8 @@ public static String tos(String[][] matrix, int colGap, int[] colWidth, final in
             int x = 0, y = 0;
             int chinese = 0;
             while (k < s.length() && x < rowHeight[i]) {
-                if (y + chinese >= colWidth[j]) {
-                    table[t + x].append(gap);//在该单元格末尾添加间隔
+                if (y + chinese + (s.charAt(k) > 128 ? 1 : 0) >= colWidth[j]) {
+                    table[t + x].append(gap).append(space(colWidth[j] - y - chinese));//在该单元格末尾添加间隔
                     chinese = 0;
                     x++;
                     y = 0;

@@ -1,5 +1,8 @@
 package cnblog.entity;
 
+import cnblog.util.CharTable;
+
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -240,10 +243,7 @@ public String getCreatedMonthDay() {
 
 @Override
 public String toString() {
-    return String.format("%20s %10s %10s",
-            this.getTitle(),
-            this.getPostid(),
-            this.getCreatedMonthDay()
-    );
+    String createDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(getDateCreated());
+    return CharTable.tos(new String[][]{{getTitle(), getPostid().toString(), createDate}}, 3, new int[]{20, 10, 30}, 80);
 }
 }
